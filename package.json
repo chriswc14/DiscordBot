@@ -1,0 +1,22 @@
+{
+  "name": "discordbot",
+  "version": "1.0.0",
+  "description": "A Bi-Directional Recurrent Neural Network-based ChatBot for Discord Implemented with Tensorflow and tfLearn",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chriswc14/DiscordBot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chriswc14/DiscordBot/issues"
+  },
+  "homepage": "https://github.com/chriswc14/DiscordBot#readme",
+  "dependencies": {
+    "discord.js": "^11.2.1"
+  }
+}
