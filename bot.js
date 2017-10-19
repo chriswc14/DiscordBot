@@ -8,7 +8,7 @@ client.on('ready', () => {
 
 
 client.on('message', message => {
-    if (message.author.username === "SuperSayTon") return;
+    if (message.author.username === "SayTon") return;
 
     if (message.content.includes('Hey')) {
         message.reply('How\'s it going?');
