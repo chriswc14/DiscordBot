@@ -1,4 +1,4 @@
-import discord from 'discord.io';
+var Discord = require('discord.js');
 
 var client = new Discord.Client();
 
@@ -12,4 +12,4 @@ client.on('message', message => {
     }
 });
 
-client.login('your token');
+client.login('MzcwMzU4MzMzNzk1NzI5NDI5.DMl6qA.qh1pIxKaWWj-v_LKZYHsLWaMsVI');
