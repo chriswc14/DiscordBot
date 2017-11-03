@@ -1,4 +1,5 @@
 import random 
+import sys
 
 # Returns the trained network
 def trainNetwork(network, msgs):
@@ -17,6 +18,18 @@ def runNetwork(msg):
     return random.choice(responses)
 
 def main():
-    print(runNetwork('bruh'))
+    run = True
+    while run == True:
+        call = sys.stdin.readline().split()
+        if call[0] == 'runNetwork':
+            res = runNetwork(call[1])
+        elif call[0] == 'saveNetwork':
+            res = saveNetwork(call[1], call[2])
+        elif call[0] == 'loadNetwork':
+            res = loadNetwork(call[1])
+        elif call[0] == 'trainNetwork':
+            res = trainNetwork(call[1], call[2])
+        print(res)
+
 
 main()
