@@ -19,6 +19,8 @@
   "homepage": "https://github.com/chriswc14/DiscordBot#readme",
   "dependencies": {
     "discord.js": "^11.2.1",
+    "jshint": "^2.9.5",
+    "jslint": "^0.11.0",
     "python-shell": "^0.4.0"
   }
 }
