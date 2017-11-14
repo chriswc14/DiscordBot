@@ -1,7 +1,8 @@
 import json
+import re
 
 
-chatHist = open('../Data/Danger_Logs.json', 'r', encoding='utf-8')
+chatHist = open('../Data/Unparsed/Danger_Logs.json', 'r', encoding='utf-8')
 
 chatHist = json.load(chatHist)
 
@@ -9,15 +10,18 @@ chatHist = json.load(chatHist)
 namsla = '250040817366990848'
 devchat = '370359173453447184'
 
-newText = open('../Data/new.txt', 'w', encoding='utf-8')
+newText = open('../Data/Parsed/anon_discord.txt', 'w', encoding='utf-8')
 
-biggestStr = 0
+msgRemoved = 0
 i = 0
 
 # Take only messages less than this
-MSG_CHAR_LIMIT = 200
+MSG_CHAR_LIMIT = 125
 # Take only this many messages
 TOTAL_MSG_LIMIT = 10000
+# Take only messages matching stuff on the American keyboard
+USA = re.compile("^[\x20-\x7F]*$")
+
 
 
 for msg in chatHist['data'][namsla]:
@@ -25,26 +29,23 @@ for msg in chatHist['data'][namsla]:
     
     x=bytes(x, 'utf-8').decode('utf-8','')
 
-    if(len(x) > biggestStr):
-        biggestStr = len(x)
-
-    # Ommit lines with nothing on them 
     if(len(x) <= 0):
-        print()
-    # Don't take messages with more than 200 characters
-    elif(len(x) >= MSG_CHAR_LIMIT):
-        print(x)
+        msgRemoved=msgRemoved+1
+    # elif(len(x) >= MSG_CHAR_LIMIT):
+    #     msgRemoved=msgRemoved+1
+    elif(USA.match(x) == None):
+        msgRemoved=msgRemoved+1
     else:
         print(x)
         newText.write(x + '\n')
-        newText.write('\n')
+        # newText.write('\n')
         i=i+1
-    # Only pull 
+
     if(i > TOTAL_MSG_LIMIT):
         break
 
 newText.close()
     
 print('Done!')
-print('Biggest Msg was: ')
-print(biggestStr)
+print('Total messages removed: ', end="")
+print(msgRemoved)

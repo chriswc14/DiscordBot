@@ -53,7 +53,7 @@ print("Network Complete. Training...")
 m = tflearn.SequenceGenerator(g, dictionary=char_idx,
                               seq_maxlen=maxlen,
                               clip_gradients=5.0,
-                              checkpoint_path='model_shakespeare')
+                              checkpoint_path='./checkpoints/sayton')
 
 for i in range(50):
     seed = random_sequence_from_textfile(path, maxlen)
