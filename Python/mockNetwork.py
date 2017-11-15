@@ -90,4 +90,4 @@ def test():
         print(network.generate(len(msg), temperature=0.1, seq_seed=seed))
 
 
-test()
+main()
