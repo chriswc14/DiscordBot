@@ -4,7 +4,17 @@ var Discord = require('discord.js');
 var client = new Discord.Client();
 var bot = process.env.npm_config_bot;
 // var PythonShell = require('python-shell');
-var pyshell = require('./PyShell/pyshell.js');
+// var pyshell = require('./PyShell/pyshell.js');
+var fs = require('fs');
+
+const {
+    spawn
+} = require('child_process');
+const py = spawn('py', ['-u', './Python/mockNetwork.py']);
+
+py.stdout.on('data', (data) => {
+    console.log(data.toString('utf8'));
+});
 
 if (bot == undefined) {
     bot = 'SayTon';
@@ -28,10 +38,17 @@ client.on('message', message => {
         if (message.content.includes('Hey')) {
             message.reply('How\'s it going?');
         } else {
-
+            console.log("Sending a message to pyshell");
+            py.stdin.write(message.content + "\r\n");
+            py.stdout.on('data', (data) => {
+                message.reply(data.toString('utf8'));
+            });
+            // setTimeout(function() {
+            //     fs.readFile('./netout.txt', 'utf8', function (err, contents) {
+            //         message.reply(contents);
+            //     });
+            // }, 10000);
         }
-    } else {
-
     }
 });
 

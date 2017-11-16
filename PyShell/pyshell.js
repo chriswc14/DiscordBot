@@ -1,10 +1,13 @@
 var PythonShell = require('python-shell');
+var pyshell = new PythonShell('./Python/mockNetwork.py', {
+    mode: 'text'
+});
 
 exports.sendMessage = function (message, callback) {
     console.log('Sending message');
-    var pyshell = new PythonShell('./Python/echo_text.py', {
-        mode: 'text'
-    });
+    // var pyshell = new PythonShell('./Python/mockNetwork.py', {
+    //     mode: 'text'
+    // });
 
     pyshell.send('runNetwork ' + message);
 
