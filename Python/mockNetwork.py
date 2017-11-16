@@ -99,6 +99,7 @@ def main():
     run = True
     while run == True:
         call = sys.stdin.readline().split()
+
         # if call[0] == 'runNetwork':
         res = runNetwork(call, network, max_len)
         # elif call[0] == 'saveNetwork':
@@ -109,10 +110,8 @@ def main():
         #     res = trainNetwork(call[1], call[2], call[3])
         # else:
         #     res = "nothing workd ;_;"
+
         print(res, flush=True)
-        netout = open("./netout.txt", mode="w", encoding="utf-8")
-        netout.write(res)
-        netout.close()
 
 
 def test():

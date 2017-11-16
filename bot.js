@@ -6,58 +6,59 @@ var bot = process.env.npm_config_bot;
 // var PythonShell = require('python-shell');
 // var pyshell = require('./PyShell/pyshell.js');
 var fs = require('fs');
+var waitForMessage = 0;
+var set = false;
 
-const {
-    spawn
-} = require('child_process');
+// Setting up the network
+const { spawn } = require('child_process');
 const py = spawn('py', ['-u', './Python/mockNetwork.py']);
 
+// Prints out python prints to console
 py.stdout.on('data', (data) => {
     console.log(data.toString('utf8'));
 });
 
-if (bot == undefined) {
-    bot = 'SayTon';
-}
+// Defaults a bot if none is passed in.
+if (bot == undefined) bot = 'SayTon';
 
+// Let's User Know that Bot is ready.
 client.on('ready', () => {
-    console.log(bot + ' is ready for chatting!');
+    console.log(bot + ' will be ready for chatting when you see NETWORK STARTUP COMPLETE!');
 });
 
+// Handles bot retrieving messages.
 client.on('message', message => {
+    console.log("Message Retrieved: " + message.content);
     var mentioned = false;
 
+    // Ignore if bot is self
     if (message.author.username === bot) return;
     if (message.isMentioned(config[bot].userId)) mentioned = true;
-    console.log(message.content);
-    console.log(config);
+    // Return if he should be metnioned but wasn't
     if (!message.content.includes(bot) && !mentioned && config[bot].replyToMentionOnly) return;
 
-    console.log('Should speak');
-    if (config[bot].replyToAllMentions == false) {
+    if (config[bot].replyToAllMessages) {
         if (message.content.includes('Hey')) {
             message.reply('How\'s it going?');
         } else {
-            console.log("Sending a message to pyshell");
+            console.log("Sending a message to network");
             py.stdin.write(message.content + "\r\n");
-            py.stdout.on('data', (data) => {
-                message.reply(data.toString('utf8'));
-            });
-            // setTimeout(function() {
-            //     fs.readFile('./netout.txt', 'utf8', function (err, contents) {
-            //         message.reply(contents);
-            //     });
-            // }, 10000);
+
+            if (!set) {
+                py.stdout.on('data', (data) => {
+                    set = true;
+                    // Don't forget to log the message!
+                    // client.sendMessage(message.channel, data.toString('utf8'));
+                    message.reply(data.toString('utf8'));
+                });
+            }
         }
+    } else {
+
     }
 });
 
 function saveBlock() {
 
 }
-
-function sendMessage() {
-
-}
-
 client.login(config[bot].key);
