@@ -63,6 +63,7 @@ def runNetwork(seed, network, max_len):
     except IndexError:
         return "\"This error shouldnt ever happen maybe \"- Dakota"
 
+    # return random.choices(responses)
     return output
 
 
@@ -83,8 +84,8 @@ def prepMsg(msg, max_len):
 
 
 def main():
-    data_path = "../Data/Parsed/anon_discord.txt"
-    char_dict_path = "./char_dict.pkl"
+    data_path = "../Data/Parsed/supreme_cornell.txt"
+    char_dict_path = "./Python/char_dict.pkl"
     save_load_point = "./Sayton_Checkpoints/sayton.model"
     max_len = 50
 
@@ -113,7 +114,7 @@ def main():
 
 
 def test():
-    data_path = "../Data/Parsed/anon_discord.txt"
+    data_path = "../Data/Parsed/supreme_cornell.txt"
     char_dict_path = "./char_dict.pkl"
     save_load_point = "./Sayton_Checkpoints/sayton.model"
     max_len = 50
@@ -167,4 +168,4 @@ def test():
         '''
 
 
-main()
+test()
