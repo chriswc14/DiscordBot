@@ -48,8 +48,8 @@ client.on('message', message => {
                 py.stdout.on('data', (data) => {
                     set = true;
                     // Don't forget to log the message!
-                    // client.sendMessage(message.channel, data.toString('utf8'));
-                    message.reply(data.toString('utf8'));
+                    message.channel.send(data.toString('utf8'));
+                    // message.reply();
                 });
             }
         }
