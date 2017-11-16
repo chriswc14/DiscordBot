@@ -1,4 +1,5 @@
 var config = require('./Config/config.js');
+// config = config[bot];
 var Discord = require('discord.js');
 var client = new Discord.Client();
 var bot = process.env.npm_config_bot;
@@ -19,42 +20,27 @@ client.on('message', message => {
     if (message.author.username === bot) return;
     if (message.isMentioned(config[bot].userId)) mentioned = true;
     console.log(message.content);
-    // if (!message.content.includes(bot) && !mentioned) return;
+    console.log(config);
+    if (!message.content.includes(bot) && !mentioned && config[bot].replyToMentionOnly) return;
 
     console.log('Should speak');
-    if (message.content.includes('Hey')) {
-        message.reply('How\'s it going?');
-    } else if (message.content.includes(' ')) {
-        console.log("Sending a message to pyshell");
-        pyshell.sendMessage(message.content, function (response) {
-            console.log("I am responding with: " + response);
-            message.reply(response);
-        });
-        // PythonShell.run('./Python/randomResponses.py', function (err, results) {
-        //     if (err) throw err;
-        //     var randomNum = Math.floor(Math.random() * 10);
-        //     message.reply(results[randomNum]);
-        // });
+    if (config[bot].replyToAllMentions == false) {
+        if (message.content.includes('Hey')) {
+            message.reply('How\'s it going?');
+        } else {
 
-        // Pyshell test
-        // var pyshell = new PythonShell('./Python/echo_text.py', {
-        //     mode: 'text'
-        // });
-        // var output = '';
-        // pyshell.stdout.on('data', function (data) {
-        //     output += '' + data;
-        // });
-        // pyshell.send('hello').send('world').end(function (err) {
-        //     if (err) {
+        }
+    } else {
 
-        //         console.log("I fail");
-        //         console.log(err);
-        //         return err;
-        //     } else {
-        //         console.log("I PASSED");
-        //     }
-        // });
     }
 });
+
+function saveBlock() {
+
+}
+
+function sendMessage() {
+
+}
 
 client.login(config[bot].key);
