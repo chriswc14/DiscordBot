@@ -53,9 +53,9 @@ def runNetwork(seed, network):
 
 
 def main():
-    data_path = "../Data/Parsed/supreme_cornell.txt"
+    data_path = "./Data/Parsed/supreme_cornell.txt"
     char_dict_path = "./Python/char_dict.pkl"
-    save_load_point = "./Sayton_Checkpoints/sayton.model"
+    save_load_point = "./Python/Sayton_Checkpoints/sayton.model"
     max_len = 30
 
     char_dict = pickle.load(open(char_dict_path, 'rb'))
@@ -65,20 +65,18 @@ def main():
     network = createNetwork(max_len, char_dict, save_load_point)
     network.load(save_load_point)
 
-    run = True
-    while run == True:
-        call = sys.stdin.readline().split()
-        if call[0] == 'runNetwork':
-            res = runNetwork(call[1:max_len], network)
-        # elif call[0] == 'saveNetwork':
-        #     res = saveNetwork(call[1], call[2])
-        # elif call[0] == 'loadNetwork':
-        #     res = loadNetwork(call[1])
-        # elif call[0] == 'trainNetwork':
-        #     res = trainNetwork(call[1], call[2], call[3])
-        else:
-            res = "nothing workd ;_;"
-        print(res)
+    call = sys.stdin.readline().split()
+    if call[0] == 'runNetwork':
+        res = runNetwork(call[1:max_len], network)
+    # elif call[0] == 'saveNetwork':
+    #     res = saveNetwork(call[1], call[2])
+    # elif call[0] == 'loadNetwork':
+    #     res = loadNetwork(call[1])
+    # elif call[0] == 'trainNetwork':
+    #     res = trainNetwork(call[1], call[2], call[3])
+    else:
+        res = "nothing workd ;_;"
+    print(res)
 
 
 def test():
@@ -109,4 +107,4 @@ def test():
         # print(network.generate(len(seed), temperature=0.1, seq_seed=seed))
 
 
-test()
+main()

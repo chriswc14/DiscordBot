@@ -28,7 +28,7 @@ client.on('message', message => {
         console.log("Sending a message to pyshell");
         pyshell.sendMessage(message.content, function (response) {
             console.log("I am responding with: " + response);
-            client.sendMessage(response);
+            message.reply(response);
         });
         // PythonShell.run('./Python/randomResponses.py', function (err, results) {
         //     if (err) throw err;
