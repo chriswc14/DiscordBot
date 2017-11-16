@@ -84,14 +84,14 @@ def prepMsg(msg, max_len):
 
 
 def main():
-    data_path = "../Data/Parsed/supreme_cornell.txt"
+    data_path = "./Data/Parsed/supreme_cornell.txt"
     char_dict_path = "./Python/char_dict.pkl"
-    save_load_point = "./Sayton_Checkpoints/sayton.model"
+    save_load_point = "./Python/Sayton_Checkpoints/sayton.model"
     max_len = 50
 
     char_dict = pickle.load(open(char_dict_path, 'rb'))
 
-    X, Y, char_dict = getData(data_path, max_len, char_dict=char_dict)
+    # X, Y, char_dict = getData(data_path, max_len, char_dict=char_dict)
 
     network = createNetwork(max_len, char_dict, save_load_point)
     network.load(save_load_point)
@@ -168,4 +168,4 @@ def test():
         '''
 
 
-test()
+main()
