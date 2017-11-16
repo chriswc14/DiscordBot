@@ -48,12 +48,13 @@ def runNetwork(seed, network):
     print(seed)
     output = network.generate(len(seed), temperature=0.1, seq_seed=seed)
 
+    # return random.choices(responses)
     return output
 
 
 def main():
-    data_path = "../Data/Parsed/anon_discord.txt"
-    char_dict_path = "./char_dict.pkl"
+    data_path = "../Data/Parsed/supreme_cornell.txt"
+    char_dict_path = "./Python/char_dict.pkl"
     save_load_point = "./Sayton_Checkpoints/sayton.model"
     max_len = 30
 
@@ -63,8 +64,6 @@ def main():
 
     network = createNetwork(max_len, char_dict, save_load_point)
     network.load(save_load_point)
-
-
 
     run = True
     while run == True:
@@ -83,10 +82,10 @@ def main():
 
 
 def test():
-    data_path = "../Data/Parsed/anon_discord.txt"
+    data_path = "../Data/Parsed/supreme_cornell.txt"
     char_dict_path = "./char_dict.pkl"
     save_load_point = "./Sayton_Checkpoints/sayton.model"
-    max_len = 30
+    max_len = 50
 
     char_dict = pickle.load(open(char_dict_path, 'rb'))
 
@@ -95,19 +94,19 @@ def test():
     network = createNetwork(max_len, char_dict, save_load_point)
 
     for i in range(50):
-        network.load(save_load_point)
-        # network = trainNetwork(network, X, Y, epochs=1)
-        # network.save(save_load_point)
+        # network.load(save_load_point)
+        network = trainNetwork(network, X, Y, epochs=5)
+        network.save(save_load_point)
 
-        seed = sys.stdin.readline()
+        # seed = sys.stdin.readline()
         # seed = random_sequence_from_textfile(data_path, max_len)
-        print("-- TESTING...")
-        print("-- Test with temperature of 1.0 --")
-        print(network.generate(len(seed), temperature=1.0, seq_seed=seed))
-        print("-- Test with temperature of 0.5 --")
-        print(network.generate(len(seed), temperature=0.5, seq_seed=seed))
-        print("-- Test with temperature of 0.1 --")
-        print(network.generate(len(seed), temperature=0.1, seq_seed=seed))
+        # print("-- TESTING...")
+        # print("-- Test with temperature of 1.0 --")
+        # print(network.generate(len(seed), temperature=1.0, seq_seed=seed))
+        # print("-- Test with temperature of 0.5 --")
+        # print(network.generate(len(seed), temperature=0.5, seq_seed=seed))
+        # print("-- Test with temperature of 0.1 --")
+        # print(network.generate(len(seed), temperature=0.1, seq_seed=seed))
 
 
-main()
+test()

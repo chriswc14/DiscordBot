@@ -9,6 +9,11 @@ setStdout();
 var output = '';
 function setStdout(callback) {
     console.log("Setting stdout function for pyshell");
+    pyshell.stdout.on('data', function (data) {
+        console.log("Retrieved a response: " + data);
+        output = data;
+        // callback(data);
+    });
 };
 
 exports.sendMessage = function (message, callback) {
@@ -17,11 +22,11 @@ exports.sendMessage = function (message, callback) {
     //     console.log("Retrieved a response: " + data);
     //     output += data;
     // });
-    pyshell.stdout.on('data', function (data) {
-        console.log("Retrieved a response: " + data);
-        output = data;
-        // callback(data);
-    });
+    // pyshell.stdout.on('data', function (data) {
+    //     console.log("Retrieved a response: " + data);
+    //     output = data;
+    //     // callback(data);
+    // });
     pyshell.send('runNetwork ' + message).end(function (err) {
         if (err) return console.log(err);
         console.log("I have successfully retrived output");

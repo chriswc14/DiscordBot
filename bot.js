@@ -2,8 +2,8 @@ var config = require('./Config/config.js');
 var Discord = require('discord.js');
 var client = new Discord.Client();
 var bot = process.env.npm_config_bot;
-var PythonShell = require('python-shell');
-// var pyshell = require('./PyShell/pyshell.js');
+// var PythonShell = require('python-shell');
+var pyshell = require('./PyShell/pyshell.js');
 
 if (bot == undefined) {
     bot = 'SayTon';
@@ -11,10 +11,6 @@ if (bot == undefined) {
 
 client.on('ready', () => {
     console.log(bot + ' is ready for chatting!');
-    // pyshell.stdout(function (response) {
-    //     console.log("I Recieved stdout");
-    //     client.sendMessage(response);
-    // })
 });
 
 client.on('message', message => {
