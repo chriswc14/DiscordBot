@@ -55,7 +55,7 @@ def runNetwork(seed, network):
 def main():
     data_path = "./Data/Parsed/supreme_cornell.txt"
     char_dict_path = "./Python/char_dict.pkl"
-    save_load_point = "./Python/Sayton_Checkpoints/sayton.model"
+    save_load_point = "./Python/Sayton_Presentation_State/sayton.model"
     max_len = 30
 
     char_dict = pickle.load(open(char_dict_path, 'rb'))
@@ -82,7 +82,7 @@ def main():
 def test():
     data_path = "../Data/Parsed/supreme_cornell.txt"
     char_dict_path = "./char_dict.pkl"
-    save_load_point = "./Sayton_Checkpoints/sayton.model"
+    save_load_point = "./Sayton_Presentation_State/sayton.model"
     max_len = 50
 
     char_dict = pickle.load(open(char_dict_path, 'rb'))
