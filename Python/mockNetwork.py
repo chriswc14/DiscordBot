@@ -96,21 +96,18 @@ def main():
     network = createNetwork(max_len, char_dict, save_load_point)
     network.load(save_load_point)
 
-    run = True
-    while run == True:
-        call = sys.stdin.readline().split()
-        print(runNetwork(call, network, max_len))
-        # if call[0] == 'runNetwork':
-        #     res = runNetwork(call[1:], network, max_len)
-        # elif call[0] == 'saveNetwork':
-        #     res = saveNetwork(call[1], call[2])
-        # elif call[0] == 'loadNetwork':
-        #     res = loadNetwork(call[1])
-        # elif call[0] == 'trainNetwork':
-        #     res = trainNetwork(call[1], call[2], call[3])
-        # else:
-        #     res = "nothing workd ;_;"
-        # print(res)
+    call = sys.stdin.readline().split()
+    if call[0] == 'runNetwork':
+        res = runNetwork(call[1:max_len], network)
+    # elif call[0] == 'saveNetwork':
+    #     res = saveNetwork(call[1], call[2])
+    # elif call[0] == 'loadNetwork':
+    #     res = loadNetwork(call[1])
+    # elif call[0] == 'trainNetwork':
+    #     res = trainNetwork(call[1], call[2], call[3])
+    else:
+        res = "nothing workd ;_;"
+    print(res)
 
 
 def test():
